@@ -1,4 +1,4 @@
-# Laporan Proyek Machine Learning - Sandy Sanjaya
+# Laporan Proyek Machine Learning - Gettar Adhi Pinaringan
 
 ## Project Overview
 
