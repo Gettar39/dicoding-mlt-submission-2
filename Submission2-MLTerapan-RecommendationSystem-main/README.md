@@ -1,61 +1,60 @@
-# Laporan Proyek Machine Learning - Gettar Adhi Pinaringan
+# **Laporan Proyek Machine Learning - Gettar Adhi Pinaringan**
 
-## Project Overview
+## **Project Overview**
 
-Dalam era digital saat ini, sistem rekomendasi telah menjadi elemen penting dalam berbagai layanan berbasis teknologi. Platform seperti YouTube, Amazon, dan Netflix telah membuktikan bagaimana algoritma rekomendasi mampu meningkatkan pengalaman pengguna secara signifikan dengan menyarankan konten yang relevan berdasarkan preferensi dan perilaku mereka. Dalam konteks ini, sistem rekomendasi tidak hanya berfungsi sebagai alat bantu, tetapi juga sebagai strategi bisnis yang dapat meningkatkan keterlibatan pengguna dan pendapatan perusahaan [1].
+Di era digital saat ini, sistem rekomendasi telah menjadi komponen esensial dalam berbagai layanan teknologi. Platform seperti YouTube, Amazon, dan Netflix telah membuktikan bahwa algoritma rekomendasi mampu meningkatkan keterlibatan pengguna secara signifikan dengan menyarankan konten yang sesuai dengan preferensi mereka. Dalam konteks ini, sistem rekomendasi bukan hanya alat bantu, melainkan strategi bisnis yang penting untuk meningkatkan loyalitas pengguna serta pendapatan \[1].
 
-Secara umum, sistem rekomendasi merupakan pendekatan berbasis data yang dirancang untuk menyarankan item—seperti produk, film, atau buku—yang kemungkinan besar akan disukai oleh pengguna. Algoritma yang digunakan biasanya memanfaatkan pola interaksi historis antara pengguna dan item, baik melalui metode kolaboratif, konten, maupun pendekatan hibrida. Salah satu indikator penting dari signifikansi sistem rekomendasi adalah kompetisi “Netflix Prize” yang diselenggarakan pada tahun 2006, di mana Netflix menawarkan hadiah sebesar satu juta dolar AS kepada siapa pun yang dapat mengembangkan algoritma rekomendasi yang mengungguli sistem internal mereka [2].
+Secara garis besar, sistem rekomendasi adalah pendekatan berbasis data yang bertujuan menyarankan item—seperti buku, film, atau produk—yang kemungkinan besar akan disukai oleh pengguna. Umumnya, algoritma yang digunakan mengandalkan pola interaksi historis antara pengguna dan item, melalui metode berbasis kolaborasi, konten, atau gabungan keduanya. Pentingnya sistem ini tercermin dari ajang “Netflix Prize” pada tahun 2006, di mana Netflix menawarkan hadiah sebesar satu juta dolar AS kepada siapa saja yang dapat mengembangkan algoritma rekomendasi yang lebih baik dari sistem internal mereka \[2].
 
-Dalam ranah literasi digital dan industri buku, sistem rekomendasi memiliki potensi yang tidak kalah besar. Banyaknya jumlah buku yang tersedia membuat pembaca kesulitan menemukan buku yang sesuai dengan minat mereka. Di sinilah sistem rekomendasi berperan penting: memberikan saran yang dipersonalisasi berdasarkan histori penilaian dan preferensi pengguna. Penerapan teknologi ini tidak hanya meningkatkan pengalaman membaca, tetapi juga membantu penerbit dan toko buku daring dalam meningkatkan eksposur buku serta mendorong pertumbuhan penjualan.
+Dalam konteks literasi digital dan industri perbukuan, penerapan sistem rekomendasi memiliki potensi besar. Jumlah buku yang sangat banyak dapat membuat pengguna kesulitan menemukan buku yang sesuai minat mereka. Di sinilah sistem rekomendasi memainkan peran penting: memberikan saran yang dipersonalisasi berdasarkan riwayat penilaian dan preferensi pengguna. Teknologi ini tidak hanya meningkatkan pengalaman membaca, tetapi juga membantu penerbit serta toko buku online dalam memperluas jangkauan buku dan meningkatkan penjualan.
 
-Proyek ini bertujuan untuk membangun sistem rekomendasi buku yang berbasis data historis rating pengguna terhadap buku. Dengan memanfaatkan dataset dari Kaggle [3], proyek ini mengembangkan model rekomendasi yang mampu memberikan saran buku yang relevan dan bermanfaat bagi pengguna. Implementasi sistem seperti ini diharapkan dapat menjadi bagian dari solusi peningkatan literasi serta mendukung transformasi digital dalam industri perbukuan.
+Proyek ini bertujuan membangun sistem rekomendasi buku berbasis data historis rating pengguna, dengan memanfaatkan dataset dari Kaggle \[3]. Sistem ini dirancang untuk memberikan rekomendasi yang relevan dan bermanfaat, serta mendukung transformasi digital di sektor literasi.
 
-### Referensi:
-[1] J. Ben Schafer, Joseph A. Konstan, and John Riedl, “E-Commerce Recommendation Applications,” *Data Mining and Knowledge Discovery*, vol. 5, no. 1-2, pp. 115–153, 2001.  
-[2] J. Bennett and S. Lanning, “The Netflix Prize,” in *Proceedings of KDD Cup and Workshop*, 2007.  
-[3] A. Nican, “Book Recommendation Dataset,” *Kaggle*, [Online]. Available: https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset
+### **Referensi**
 
-## Business Understanding
-
-Sistem rekomendasi merupakan bagian penting dalam mempersonalisasi pengalaman pengguna di berbagai platform digital, termasuk platform literasi dan penjualan buku. Dengan memanfaatkan data historis berupa rating pengguna terhadap buku, sistem dapat memberikan rekomendasi buku lain yang sesuai dengan preferensi pengguna, bahkan jika buku tersebut belum pernah dibaca sebelumnya.
-
-Pada bagian ini, akan dijelaskan proses klarifikasi masalah, tujuan dari proyek, serta pendekatan solusi yang digunakan untuk membangun sistem rekomendasi buku.
+\[1] J. Ben Schafer, Joseph A. Konstan, and John Riedl, “E-Commerce Recommendation Applications,” *Data Mining and Knowledge Discovery*, vol. 5, no. 1-2, pp. 115–153, 2001.
+\[2] J. Bennett and S. Lanning, “The Netflix Prize,” in *Proceedings of KDD Cup and Workshop*, 2007.
+\[3] A. Nican, “Book Recommendation Dataset,” *Kaggle*, \[Online]. Available: [https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset](https://www.kaggle.com/datasets/arashnic/book-recommendation-dataset)
 
 ---
 
-### Problem Statements
+## **Bussiness Understanding**
 
-1. **Bagaimana mengidentifikasi pola preferensi pengguna terhadap buku berdasarkan data rating yang tersedia?**
+Sistem rekomendasi menjadi komponen penting dalam upaya personalisasi pengalaman pengguna, termasuk pada platform literasi dan penjualan buku. Dengan menganalisis data historis berupa rating buku yang diberikan pengguna, sistem ini dapat menyarankan buku-buku lain yang sesuai dengan minat mereka—meskipun belum pernah dibaca sebelumnya.
 
-2. **Bagaimana menyarankan buku yang belum pernah dibaca oleh pengguna, namun memiliki kemungkinan besar untuk disukai, berdasarkan kesamaan preferensi antar pengguna?**
-
-3. **Bagaimana menyajikan hasil eksplorasi data dalam bentuk visualisasi untuk mendukung proses analisis dan pemodelan sistem rekomendasi?**
+Bagian ini akan menjelaskan definisi masalah, tujuan proyek, serta pendekatan solusi yang digunakan dalam membangun sistem rekomendasi buku.
 
 ---
 
-### Goals
+### **Problem Statements**
 
-1. **Mengolah data rating pengguna untuk memahami distribusi preferensi dan interaksi antar pengguna dan buku.**
-
-2. **Membangun sistem rekomendasi berbasis collaborative filtering yang mampu menyarankan buku sesuai dengan selera pengguna yang memiliki pola interaksi serupa.**
-
-3. **Menyajikan hasil eksplorasi data dalam bentuk visualisasi (seperti bar plot) untuk memberikan wawasan mengenai distribusi rating, usia pengguna, dan buku paling populer.**
+1. **Bagaimana cara mengenali pola preferensi pengguna terhadap buku berdasarkan data rating yang tersedia?**
+2. **Bagaimana menyarankan buku yang belum pernah dibaca oleh pengguna, namun kemungkinan besar akan disukai, berdasarkan kesamaan preferensi dengan pengguna lain?**
+3. **Bagaimana menyajikan hasil eksplorasi data dalam bentuk visualisasi untuk mendukung proses analisis dan pembangunan sistem rekomendasi?**
 
 ---
 
-### Solution Statements
+### **Goals**
 
-Untuk mencapai tujuan yang telah ditentukan, proyek ini menggunakan pendekatan berikut:
+1. **Mengolah data rating pengguna untuk memahami distribusi preferensi serta interaksi antara pengguna dan buku.**
+2. **Mengembangkan sistem rekomendasi berbasis *collaborative filtering* yang dapat menyarankan buku sesuai selera pengguna dengan pola interaksi serupa.**
+3. **Menyediakan visualisasi eksploratif (seperti *bar plot*) untuk menampilkan informasi seputar distribusi rating, usia pengguna, dan buku yang paling populer.**
 
-1. **Neural Collaborative Filtering (NCF)**  
-   Sistem rekomendasi ini menggunakan representasi embedding untuk memetakan pengguna dan buku ke dalam ruang vektor berdimensi rendah, lalu menghitung kemiripan atau interaksi antar keduanya menggunakan operasi dot product. Model ini dibangun dengan TensorFlow menggunakan layer `Embedding` untuk user dan item, serta dioptimasi untuk memprediksi rating dengan pendekatan regresi berbasis sigmoid.
+---
 
-   Keunggulan pendekatan ini adalah kemampuannya menangkap hubungan non-linear antara user dan item, serta fleksibilitas dalam pengembangan model yang lebih kompleks di masa depan.
+### **Solution Statements**
 
-2. **Visualisasi Eksploratif untuk Mendukung Rekomendasi**  
-   Sebelum membangun model, dilakukan eksplorasi data melalui visualisasi seperti *bar plot* terhadap rating buku, usia pengguna, dan sebaran interaksi. Visualisasi ini membantu memahami distribusi data dan mendukung proses pengambilan keputusan dalam pemodelan.
+Untuk memenuhi tujuan di atas, proyek ini mengimplementasikan pendekatan berikut:
 
-Melalui pendekatan ini, sistem rekomendasi yang dibangun diharapkan mampu memberikan hasil yang relevan dan akurat berdasarkan preferensi pengguna yang tersirat dalam data rating.
+1. **Neural Collaborative Filtering (NCF)**
+   Sistem ini menggunakan teknik embedding untuk memetakan pengguna dan buku ke dalam ruang vektor berdimensi rendah, kemudian memprediksi tingkat kecocokan melalui operasi *dot product*. Model dibangun menggunakan TensorFlow dengan layer `Embedding` untuk pengguna dan item, serta menggunakan fungsi aktivasi sigmoid untuk prediksi rating.
+
+   Pendekatan ini unggul dalam menangkap relasi non-linear antara pengguna dan buku, serta memberikan fleksibilitas dalam pengembangan model ke depan.
+
+2. **Visualisasi Eksploratif untuk Analisis Data**
+   Sebelum pembuatan model, dilakukan eksplorasi data menggunakan visualisasi seperti *bar plot* untuk menampilkan sebaran rating, usia pengguna, serta interaksi pengguna terhadap buku. Visualisasi ini memberikan wawasan penting yang mendukung proses analitik dan pengambilan keputusan.
+
+Dengan strategi ini, sistem rekomendasi yang dibangun diharapkan dapat memberikan saran yang akurat dan relevan berdasarkan pola preferensi yang tersirat dalam data historis pengguna.
 
 ## Data Understanding
 
@@ -81,49 +80,33 @@ Dataset yang digunakan dalam proyek ini bersumber dari [Book Recommendation Data
 
 ### Penjelasan Variabel
 
-#### 1. Users
+**Fitur-fitur dalam *Book Recommendation System Dataset* adalah:**
 
-Dataset ini berisi informasi pengguna yang meliputi user_id, lokasi, dan usia.
+**\[df\_user]**
 
-| Kolom      | Deskripsi                                                                 |
-|------------|---------------------------------------------------------------------------|
-| `User_id`  | ID unik yang merepresentasikan masing-masing pengguna.                   |
-| `Location` | Lokasi geografis pengguna (negara/kota/kode pos).                        |
-| `Age`      | Usia pengguna (dapat berisi nilai kosong atau tidak valid).              |
+* **user\_id**: ID unik yang merepresentasikan masing-masing pengguna.
+* **location**: Lokasi geografis pengguna, dapat mencakup negara, kota, atau kode pos.
+* **age**: Usia pengguna. Nilai dapat kosong atau tidak valid.
 
----
+**\[df\_books]**
 
-#### 2. Ratings
+* **ISBN**: Nomor unik identifikasi buku.
+* **title**: Judul buku.
+* **author**: Nama penulis buku.
+* **year**: Tahun publikasi buku.
+* **publisher**: Nama penerbit buku.
+* **image\_url\_s / image\_url\_m / image\_url\_l**: Tautan ke gambar sampul buku dalam resolusi kecil (s), sedang (m), dan besar (l).
 
-Dataset ini merepresentasikan rating atau penilaian yang diberikan pengguna terhadap buku tertentu.
+**\[df\_rating]**
 
-| Kolom     | Deskripsi                                                             |
-|-----------|----------------------------------------------------------------------|
-| `User_id` | ID pengguna yang memberi rating.                                     |
-| `ISBN`    | ID buku yang dinilai.                                                |
-| `Rating`  | Nilai rating yang diberikan (rentang 0–10; 0 bisa berarti tidak eksplisit). |
-
----
-
-#### 3. Books
-
-Dataset ini mencakup detail informasi buku yang ada di sistem.
-
-| Kolom              | Deskripsi                                                                   |
-|--------------------|------------------------------------------------------------------------------|
-| `ISBN`             | Nomor unik identifikasi buku.                                               |
-| `Title`            | Judul buku.                                                                 |
-| `Author`           | Nama penulis buku.                                                          |
-| `Year`             | Tahun publikasi buku.                                                       |
-| `Publisher`        | Nama penerbit buku.                                                         |
-| `Image-URL-S/M/L`  | URL gambar cover buku (kecil, sedang, besar) — dihapus karena tidak digunakan. |
-
----
+* **user\_id**: ID pengguna yang memberikan rating terhadap buku.
+* **ISBN**: ID buku yang diberi rating.
+* **rating**: Nilai rating yang diberikan oleh pengguna terhadap buku, dalam skala 0–10. Nilai 0 dapat berarti tidak ada rating eksplisit.
 
 ### Eksploratory Data Analysis (EDA)
 Untuk memperkuat pemahaman terhadap karakteristik dataset, berikut adalah beberapa visualisasi yang dilakukan:
 #### 1. Top Contributors in Book Dataset
-![Top Contributors in Book Dataset](visualisasi/Gambar1.png)
+![Top Contributors in Book Dataset](visualisasi/Topc.png)
 
 **Insight**:
 - Tahun terbit terbanyak: 2002, disusul 2001 dan 2000.
@@ -140,7 +123,7 @@ Untuk memperkuat pemahaman terhadap karakteristik dataset, berikut adalah bebera
 
 ---
 #### 2. Distribution of Book Ratings
-![Distribution of Book Ratings](visualisasi/Gambar2.png)
+![Distribution of Book Ratings](visualisasi/Dist.png)
 **Insight**:
 - Rating 0 mendominasi (>700.000 entri) → menunjukkan **rating implisit**.
 - Rating eksplisit (1–10) didominasi nilai tinggi:
@@ -150,7 +133,7 @@ Untuk memperkuat pemahaman terhadap karakteristik dataset, berikut adalah bebera
 
 ---
 #### 3. 20 top location of the users
-![20 Top Location of the Users](visualisasi/Gambar3.png)
+![20 Top Location of the Users](visualisasi/top20.png)
 **Insight**:
 - Mayoritas pengguna berasal dari negara-negara berbahasa Inggris.
 - Lokasi pengguna terbanyak:
@@ -353,7 +336,7 @@ RMSE mengukur seberapa jauh prediksi model dari nilai aktualnya. Semakin kecil n
 
 Model dievaluasi menggunakan data validasi selama proses pelatihan sebanyak 8 epoch. Berikut adalah grafik performa model berdasarkan nilai RMSE pada data training dan validation:
 
-![hasil evaluasi](visualisasi/Gambar5.png)
+![hasil evaluasi](visualisasi/model.png)
 
 **Insight dari Grafik:**
 Hasil pelatihan selama 8 epoch menunjukkan bahwa model mencapai performa validasi terbaik pada epoch kelima dengan RMSE validasi sebesar 0.3640. Setelah itu, performa mulai menurun secara bertahap, yang mengindikasikan adanya overfitting. Hal ini terlihat jelas pada epoch 6 dan 7, di mana nilai loss dan RMSE meningkat tajam, menunjukkan bahwa model tidak lagi belajar dengan optimal dari data. Di akhir pelatihan (epoch 8), performa validasi sedikit membaik, namun tetap belum melebihi performa terbaik pada epoch kelima.
