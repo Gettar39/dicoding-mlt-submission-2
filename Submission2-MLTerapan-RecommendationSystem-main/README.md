@@ -254,14 +254,25 @@ Dataset gabungan memiliki lebih dari satu juta entri yang berpotensi memperlamba
 Untuk menjaga keutuhan data asli, data hasil sampling disalin menjadi variabel baru yang digunakan khusus untuk proses training dan evaluasi model.
 
 #### 2. Encoding  
-Model collaborative filtering, khususnya berbasis neural network, membutuhkan input dalam bentuk numerik. Oleh karena itu, kolom `User_id` dan `ISBN` di-*encode* menjadi integer menggunakan `LabelEncoder`.  
+Model collaborative filtering, khususnya berbasis neural network, membutuhkan input dalam bentuk numerik. Oleh karena itu, kolom `User_id` dan `ISBN` di-*encode* menjadi integer menggunakan `Dictionary mapping`.  
 Hasil encoding menunjukkan terdapat:
 - **61.584 pengguna unik**
 - **177.748 buku unik**
 
 Hal ini menunjukkan cakupan dan keragaman interaksi yang cukup tinggi dalam dataset.
 
-#### 3. Pembagian Data  
+#### 3. Normalisasi Nilai Rating
+
+Untuk menyesuaikan skala nilai `Rating` dengan fungsi aktivasi sigmoid di layer output model **Neural Collaborative Filtering (NCF)**, dilakukan **normalisasi nilai `Rating` ke rentang 0–1**. Ini penting agar model tidak kesulitan belajar memetakan nilai yang awalnya berada pada skala 0–10 ke output sigmoid yang hanya menghasilkan angka antara 0–1.
+
+Langkah normalisasi dilakukan menggunakan rumus:
+
+$$
+\text{Rating}_{\text{norm}} = \frac{\text{Rating} - \text{min\_rating}}{\text{max\_rating} - \text{min\_rating}}
+$$
+
+
+#### 4. Pembagian Data  
 Setelah proses encoding, dataset dibagi menjadi dua bagian:
 - **80% data training**
 - **20% data testing**
@@ -294,24 +305,27 @@ Model dibangun menggunakan TensorFlow dengan pendekatan **Neural Collaborative F
 Model dilatih selama **8 epoch**, dengan metrik evaluasi utama yaitu **Root Mean Squared Error (RMSE)** pada data training dan validation.
 
 #### Insight Model:
-Hasil pelatihan selama 8 epoch menunjukkan bahwa model mencapai performa validasi terbaik pada epoch kelima dengan RMSE validasi sebesar 0.3640. Setelah itu, performa mulai menurun secara bertahap, yang mengindikasikan adanya overfitting. Hal ini terlihat jelas pada epoch 7 dan 8, di mana nilai loss dan RMSE meningkat tajam, menunjukkan bahwa model tidak lagi belajar dengan optimal dari data. Di akhir pelatihan (epoch 8), performa validasi tetap menurun. Namun, tidak mampu melebihi performa terbaik sebelumnya.
+Hasil pelatihan selama 50 epoch menunjukkan bahwa model mencapai performa validasi terbaik pada epoch kelima dengan RMSE validasi sebesar 0.3640. Setelah itu, performa mulai menurun secara bertahap, yang mengindikasikan adanya overfitting. Hal ini terlihat jelas pada epoch 7 dan 8, di mana nilai loss dan RMSE meningkat tajam, menunjukkan bahwa model tidak lagi belajar dengan optimal dari data. Di akhir pelatihan (epoch 8), performa validasi tetap menurun. Namun, tidak mampu melebihi performa terbaik sebelumnya.
 
 ### Output: Top 10 Book Recommendation
 
 Model berhasil memberikan **top-10 rekomendasi buku** untuk pengguna tertentu. Berikut adalah contoh hasil rekomendasi:
 
-- Harry Potter and the Chamber of Secrets (Book 2)
-- Harry Potter and the Goblet of Fire (Book 4)
-- Harry Potter and the Sorcerer's Stone (Book 1)
-- The Lovely Bones: A Novel
-- Free
-- The Hobbit : The Enchanting Prelude to The Lord of the Rings
-- Harry Potter and the Prisoner of Azkaban (Book 3)
-- Coraline
-- The Da Vinci Code
-- Sam's Letters to Jennifer
+|index|No|ISBN|Title|Predicted Rating|
+|---|---|---|---|---|
+|0|1|0671867679|Betty Crocker's New Choices Cookbook: More Than 500 Great-Tasting Easy Recipes for Eating Right|0\.0007081819931045175|
+|1|2|0380493462|Westing Game|0\.00044982906547375023|
+|2|3|0670894605|The Secret Life of Bees|0\.00044734246330335736|
+|3|4|0765340135|The Shadow Sorceress \(The Spellsong Cycle, Book 4\)|0\.00038258518907241523|
+|4|5|1572460733|The Law|0\.0003094459243584424|
+|5|6|1564144992|Urban Legends: The Truth Behind All Those Deliciously Entertaining Myths That Are Absolutely, Positively, 100% Not True|0\.00030656118178740144|
+|6|7|0380645432|Howliday Inn|0\.000304904708173126|
+|7|8|1560974109|Mail Order Bride|0\.00029777357121929526|
+|8|9|0553801910|Keeping Watch|0\.00029766629450023174|
+|9|10|0515134503|Obsidian Butterfly \(Anita Blake Vampire Hunter \(Paperback\)\)|0\.00029084383277222514|
 
-Rekomendasi ini menunjukkan bahwa model berhasil menangkap preferensi pengguna terhadap genre **fantasi populer**, **novel klasik**, dan **kisah bernuansa emosional** atau **historis**. Dominasi buku dari seri *Harry Potter* juga mengindikasikan bahwa sistem mengenali konsistensi minat pengguna terhadap suatu franchise atau penulis.
+Rekomendasi ini menunjukkan bahwa model cenderung menangkap preferensi pengguna terhadap **buku nonfiksi populer**, **buku resep sehat**, serta **novel remaja dan fiksi ringan**. Kehadiran buku seperti *Betty Crocker's New Choices Cookbook* dan *Urban Legends* mengindikasikan minat pada konten informatif dan praktis yang mudah dicerna. Sementara itu, keberadaan judul seperti *Westing Game*, *Howliday Inn*, dan *The Secret Life of Bees* menunjukkan ketertarikan pada **kisah fiksi dengan unsur misteri, petualangan, atau drama keluarga yang menyentuh**. Model juga tampaknya mengenali kecenderungan pengguna terhadap **bacaan santai dengan elemen naratif yang kuat dan mudah diakses**.
+
 
 ### Kelebihan dan Kekurangan
 
@@ -334,21 +348,24 @@ RMSE mengukur seberapa jauh prediksi model dari nilai aktualnya. Semakin kecil n
 
 ### Hasil Evaluasi
 
-Model dievaluasi menggunakan data validasi selama proses pelatihan sebanyak 8 epoch. Berikut adalah grafik performa model berdasarkan nilai RMSE pada data training dan validation:
+Model dievaluasi menggunakan data validasi selama proses pelatihan sebanyak 50 epoch. Berikut adalah grafik performa model berdasarkan nilai RMSE pada data training dan validation:
 
 ![hasil evaluasi](visualisasi/model.png)
 
 ### **Insight dari Grafik**
 
-Proses pelatihan selama 50 epoch menunjukkan bahwa performa terbaik model pada data validasi dicapai di epoch kedua, dengan nilai RMSE mendekati 0.37. Setelahnya, performa validasi cenderung menurun secara bertahap, tercermin dari kenaikan RMSE validasi hingga akhir pelatihan. Pola fluktuasi pada kurva RMSE untuk training dan validasi menunjukkan kurangnya kestabilan dalam proses pembelajaran model. Meskipun sesekali terjadi penurunan RMSE, tren umum menunjukkan bahwa model mulai mengalami **overfitting** setelah beberapa epoch awal. Hal ini terlihat dari RMSE training yang tetap berfluktuasi tinggi dan validasi yang terus memburuk pasca titik optimal. Oleh karena itu, penerapan teknik **early stopping** sangat disarankan agar performa terbaik yang dicapai di awal dapat dipertahankan.
 
----
+Proses pelatihan selama 50 epoch menunjukkan bahwa performa terbaik model pada data validasi dicapai di **epoch pertama**, dengan nilai RMSE mendekati **0.3673**. Setelahnya, performa validasi cenderung menurun secara bertahap, yang tercermin dari peningkatan nilai RMSE validasi hingga akhir pelatihan.
+
+Pola fluktuasi pada kurva RMSE untuk data pelatihan dan validasi memperlihatkan kurangnya kestabilan dalam proses pembelajaran model. Meskipun terdapat beberapa penurunan RMSE pada epoch tertentu, seperti epoch ke-10 dan 14, secara umum tren validasi menunjukkan kemunduran performa. Hal ini mengindikasikan bahwa model mulai mengalami **overfitting** setelah beberapa epoch awal.
+
+Overfitting ini ditandai oleh RMSE validasi yang semakin meningkat, sementara RMSE pelatihan justru tidak menunjukkan pola perbaikan yang konsisten. Dengan demikian, penerapan teknik **early stopping** sangat disarankan untuk menghentikan pelatihan saat performa terbaik tercapai di awal, sehingga dapat mencegah degradasi kinerja pada data validasi.
 
 ### **Evaluasi Berdasarkan Metrik**
 
-* Model dievaluasi menggunakan metrik **Root Mean Square Error (RMSE)** untuk menilai akurasi prediksi selama proses pelatihan dan validasi.
-* Model **Neural Collaborative Filtering (NCF)** menunjukkan performa validasi terbaik pada epoch kelima dengan **RMSE sekitar 0.37**, sebelum mulai menunjukkan gejala overfitting di epoch selanjutnya.
-* Evaluasi ini memperlihatkan bahwa pendekatan deep learning berbasis collaborative filtering dapat mengenali pola preferensi pengguna secara mendalam, meskipun dataset memiliki skala dan kompleksitas yang tinggi.
+* Model dievaluasi menggunakan metrik **Root Mean Square Error (RMSE)** untuk mengukur kualitas prediksi baik pada data pelatihan maupun validasi selama 50 epoch.
+* Model **Neural Collaborative Filtering (NCF)** mencapai performa validasi terbaik pada **epoch pertama** dengan **RMSE sekitar 0.3673**, sebelum performa mulai menurun akibat **overfitting** pada epoch-epoch selanjutnya.
+* Hasil ini menunjukkan bahwa pendekatan berbasis deep learning seperti NCF mampu menangkap representasi hubungan pengguna-item dengan baik di awal pelatihan. Namun, tanpa mekanisme regulasi atau **early stopping**, model cenderung kehilangan kemampuan generalisasi seiring bertambahnya epoch, terutama pada dataset dengan kompleksitas tinggi.
 
 ---
 
@@ -385,12 +402,3 @@ Proyek sistem rekomendasi buku ini menunjukkan bahwa penggunaan pendekatan **mac
 * Mendukung pengembangan ekosistem literasi digital melalui teknologi yang adaptif.
 
 Secara keseluruhan, sistem rekomendasi yang dibangun tidak hanya berhasil secara teknis, tetapi juga menawarkan **nilai strategis** bagi transformasi digital di sektor pendidikan dan industri buku.
-
----
-
-Jika Anda ingin saya bantu membuat bagian **saran pengembangan ke depan (future work)** atau **dokumentasi teknis ringkas**, saya siap bantu juga!
-
-
-
-
-
