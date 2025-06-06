@@ -302,14 +302,14 @@ Model dibangun menggunakan TensorFlow dengan pendekatan **Neural Collaborative F
 - **Loss Function dan Optimizer**  
   Model menggunakan **Binary Crossentropy** karena pendekatannya serupa dengan klasifikasi biner terhadap kesukaan pengguna, serta dioptimalkan dengan **Adam Optimizer**. Metrik utama yang digunakan adalah **Root Mean Squared Error (RMSE)** untuk menilai akurasi prediksi.
 
-Model dilatih selama **8 epoch**, dengan metrik evaluasi utama yaitu **Root Mean Squared Error (RMSE)** pada data training dan validation.
+Model dilatih selama **50 epoch**, dengan metrik evaluasi utama yaitu **Root Mean Squared Error (RMSE)** pada data training dan validation.
 
 #### Insight Model:
-Hasil pelatihan selama 50 epoch menunjukkan bahwa model mencapai performa validasi terbaik pada epoch kelima dengan RMSE validasi sebesar 0.3640. Setelah itu, performa mulai menurun secara bertahap, yang mengindikasikan adanya overfitting. Hal ini terlihat jelas pada epoch 7 dan 8, di mana nilai loss dan RMSE meningkat tajam, menunjukkan bahwa model tidak lagi belajar dengan optimal dari data. Di akhir pelatihan (epoch 8), performa validasi tetap menurun. Namun, tidak mampu melebihi performa terbaik sebelumnya.
+Hasil pelatihan selama 50 epoch menunjukkan bahwa model mencapai performa validasi terbaik pada **epoch pertama** dengan **RMSE validasi sebesar 0.3673**. Setelah itu, performa mulai menurun secara bertahap, yang mengindikasikan adanya **overfitting**. Hal ini terlihat jelas sejak epoch ke-6 hingga seterusnya, di mana nilai loss dan RMSE validasi terus meningkat, menunjukkan bahwa model tidak lagi mampu belajar secara efektif dari data. Di akhir pelatihan (epoch 50), performa validasi tetap berada di bawah performa awal dan tidak mampu melebihi hasil terbaik yang telah dicapai sebelumnya.
 
 ### Output: Top 10 Book Recommendation
 
-Model berhasil memberikan **top-10 rekomendasi buku** untuk pengguna tertentu. Berikut adalah contoh hasil rekomendasi:
+Model berhasil memberikan **top-10 rekomendasi buku** untuk pengguna tertentu (contohnya pengguna dengan `user_id` = 278418) . Berikut adalah contoh hasil rekomendasi:
 
 |index|No|ISBN|Title|Predicted Rating|
 |---|---|---|---|---|
@@ -324,7 +324,7 @@ Model berhasil memberikan **top-10 rekomendasi buku** untuk pengguna tertentu. B
 |8|9|0553801910|Keeping Watch|0\.00029766629450023174|
 |9|10|0515134503|Obsidian Butterfly \(Anita Blake Vampire Hunter \(Paperback\)\)|0\.00029084383277222514|
 
-Rekomendasi ini menunjukkan bahwa model cenderung menangkap preferensi pengguna terhadap **buku nonfiksi populer**, **buku resep sehat**, serta **novel remaja dan fiksi ringan**. Kehadiran buku seperti *Betty Crocker's New Choices Cookbook* dan *Urban Legends* mengindikasikan minat pada konten informatif dan praktis yang mudah dicerna. Sementara itu, keberadaan judul seperti *Westing Game*, *Howliday Inn*, dan *The Secret Life of Bees* menunjukkan ketertarikan pada **kisah fiksi dengan unsur misteri, petualangan, atau drama keluarga yang menyentuh**. Model juga tampaknya mengenali kecenderungan pengguna terhadap **bacaan santai dengan elemen naratif yang kuat dan mudah diakses**.
+Rekomendasi ini menunjukkan pengguna dengan `user_id` = 278418 menunjukan bahwa model cenderung menangkap preferensi pengguna terhadap **buku nonfiksi populer**, **buku resep sehat**, serta **novel remaja dan fiksi ringan**. Kehadiran buku seperti *Betty Crocker's New Choices Cookbook* dan *Urban Legends* mengindikasikan minat pada konten informatif dan praktis yang mudah dicerna. Sementara itu, keberadaan judul seperti *Westing Game*, *Howliday Inn*, dan *The Secret Life of Bees* menunjukkan ketertarikan pada **kisah fiksi dengan unsur misteri, petualangan, atau drama keluarga yang menyentuh**. Model juga tampaknya mengenali kecenderungan pengguna terhadap **bacaan santai dengan elemen naratif yang kuat dan mudah diakses**.
 
 
 ### Kelebihan dan Kekurangan
