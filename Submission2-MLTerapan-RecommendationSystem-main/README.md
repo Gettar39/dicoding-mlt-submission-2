@@ -106,7 +106,7 @@ Dataset yang digunakan dalam proyek ini bersumber dari [Book Recommendation Data
 ### Eksploratory Data Analysis (EDA)
 Untuk memperkuat pemahaman terhadap karakteristik dataset, berikut adalah beberapa visualisasi yang dilakukan:
 #### 1. Top Contributors in Book Dataset
-![Top Contributors in Book Dataset](visualisasi/Topc.png)
+![Top Contributors in Book Dataset](visualisasi/TopC.png)
 
 **Insight**:
 - Tahun terbit terbanyak: 2002, disusul 2001 dan 2000.
