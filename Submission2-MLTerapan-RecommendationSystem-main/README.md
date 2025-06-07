@@ -321,18 +321,19 @@ Model berhasil memberikan **top-10 rekomendasi buku** untuk pengguna tertentu (c
 
 |index|No|ISBN|Title|Predicted Rating|
 |---|---|---|---|---|
-|0|1|0671867679|Betty Crocker's New Choices Cookbook: More Than 500 Great-Tasting Easy Recipes for Eating Right|0\.0007081819931045175|
-|1|2|0380493462|Westing Game|0\.00044982906547375023|
-|2|3|0670894605|The Secret Life of Bees|0\.00044734246330335736|
-|3|4|0765340135|The Shadow Sorceress \(The Spellsong Cycle, Book 4\)|0\.00038258518907241523|
-|4|5|1572460733|The Law|0\.0003094459243584424|
-|5|6|1564144992|Urban Legends: The Truth Behind All Those Deliciously Entertaining Myths That Are Absolutely, Positively, 100% Not True|0\.00030656118178740144|
-|6|7|0380645432|Howliday Inn|0\.000304904708173126|
-|7|8|1560974109|Mail Order Bride|0\.00029777357121929526|
-|8|9|0553801910|Keeping Watch|0\.00029766629450023174|
-|9|10|0515134503|Obsidian Butterfly \(Anita Blake Vampire Hunter \(Paperback\)\)|0\.00029084383277222514|
+|0|1|1844262553|Free|0\.0007431102567352355|
+|1|2|0590353403|Harry Potter and the Sorcerer's Stone \(Book 1\)|0\.0002697056042961776|
+|2|3|0836213122|There's Treasure Everywhere--A Calvin and Hobbes Collection|0\.00023159828560892493|
+|3|4|0812968379|Funny in Farsi : A Memoir of Growing Up Iranian in America|0\.0002200721064582467|
+|4|5|0394800389|Fox in Socks \(I Can Read It All by Myself Beginner Books\)|0\.00020497523655649275|
+|5|6|0393050939|Stiff: The Curious Lives of Human Cadavers|0\.00019354396499693394|
+|6|7|0091842050|The Blue Day Book: A Lesson in Cheering Yourself Up|0\.00018884119344875216|
+|7|8|0425174484|Expecting Adam: A True Story of Birth, Rebirth, and Everyday Magic|0\.00018344596901442856|
+|8|9|0505523752|Dark Gold|0\.00017589527124073356|
+|9|10|0439064864|Harry Potter and the Chamber of Secrets \(Book 2\)|0\.0001741126470733434|
 
-Rekomendasi ini menunjukkan pengguna dengan `user_id` = 278418 menunjukan bahwa model cenderung menangkap preferensi pengguna terhadap **buku nonfiksi populer**, **buku resep sehat**, serta **novel remaja dan fiksi ringan**. Kehadiran buku seperti *Betty Crocker's New Choices Cookbook* dan *Urban Legends* mengindikasikan minat pada konten informatif dan praktis yang mudah dicerna. Sementara itu, keberadaan judul seperti *Westing Game*, *Howliday Inn*, dan *The Secret Life of Bees* menunjukkan ketertarikan pada **kisah fiksi dengan unsur misteri, petualangan, atau drama keluarga yang menyentuh**. Model juga tampaknya mengenali kecenderungan pengguna terhadap **bacaan santai dengan elemen naratif yang kuat dan mudah diakses**.
+Rekomendasi ini menunjukkan bahwa model cenderung menangkap preferensi pengguna dengan `user_id` = 278418 terhadap **buku anak dan remaja**, **memoar dengan nuansa personal**, serta **karya nonfiksi ringan yang mengandung unsur humor atau keingintahuan ilmiah**. Kehadiran buku seperti *Fox in Socks* dan dua judul dari seri *Harry Potter* mengindikasikan ketertarikan pada **bacaan imajinatif yang ringan dan menghibur**, terutama yang populer di kalangan anak dan remaja. Sementara itu, buku seperti *Funny in Farsi* dan *Expecting Adam* menunjukkan minat pada **kisah nyata yang menyentuh, lucu, dan mudah dipahami**, sering kali menyangkut tema keluarga atau pengalaman hidup unik. Selain itu, keberadaan judul seperti *Stiff: The Curious Lives of Human Cadavers* dan *The Blue Day Book* menandakan ketertarikan pada **bacaan nonfiksi populer dengan pendekatan yang ringan dan mengedukasi**. Model tampaknya menangkap preferensi terhadap **bacaan yang bersifat reflektif, menghibur, dan mudah diakses**, baik dalam bentuk fiksi maupun nonfiksi.
+
 
 
 ### Kelebihan dan Kekurangan
