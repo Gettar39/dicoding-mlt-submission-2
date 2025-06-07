@@ -152,7 +152,15 @@ Tahap *Data Preparation* bertujuan untuk memastikan bahwa data yang digunakan da
 
 Beberapa langkah pembersihan data yang dilakukan dalam proyek ini meliputi:
 
-#### 1. Menangani Missing Values
+#### 1. Mengubah Nama Kolom agar Lebih Konsisten
+
+Sebelum melanjutkan ke tahap analisis dan pemodelan, dilakukan standarisasi nama kolom pada masing-masing dataset (`df_rating`, `df_user`, `df_books`). Tujuannya adalah untuk:
+
+* Menyederhanakan penamaan kolom (menghindari spasi dan tanda hubung),
+* Mempermudah pemanggilan kolom saat coding (mengurangi potensi typo),
+* Menyelaraskan format antar dataset (misalnya `User-ID` diubah jadi `User_id` secara seragam).
+
+#### 2. Menangani Missing Values
 
 - **Kolom `Age` pada dataset `Users`**  
   Nilai kosong diisi menggunakan **modus (nilai yang paling sering muncul)**. Pendekatan ini dipilih karena dianggap dapat mewakili mayoritas usia pengguna dan meminimalkan distorsi terhadap distribusi data.
@@ -163,11 +171,11 @@ Beberapa langkah pembersihan data yang dilakukan dalam proyek ini meliputi:
 - **Kolom `Image-URL-S`, `Image-URL-M`, dan `Image-URL-L`**  
   Kolom-kolom ini dihapus karena informasi gambar tidak digunakan dalam sistem rekomendasi. Penghapusan dilakukan untuk menyederhanakan struktur data dan mempercepat proses pemrosesan.
 
-#### 2. Mengecek dan Menangani Duplikasi
+#### 3. Mengecek dan Menangani Duplikasi
 
 Setelah dilakukan pengecekan terhadap ketiga dataset (`Users`, `Ratings`, dan `Books`), tidak ditemukan baris duplikat. Hal ini menunjukkan bahwa setiap entri bersifat unik dan tidak ada pengulangan informasi, sehingga tidak diperlukan proses penghapusan duplikasi.
 
-#### 3. Data Merging 
+#### 4. Data Merging 
 
 - Dataset **Ratings** digabungkan dengan **Books** berdasarkan `ISBN`, menghasilkan lebih dari **1 juta baris data**.
 - Setiap interaksi kini dilengkapi:
@@ -179,7 +187,7 @@ Setelah dilakukan pengecekan terhadap ketiga dataset (`Users`, `Ratings`, dan `B
   - Tahun terbit
   - Penerbit
 
-#### 4. Mengelompokkan Data Rating Berdasarkan `user_id` dan Mengambil 20 Pengguna dengan Jumlah Rating Terbanyak
+#### 5. Mengelompokkan Data Rating Berdasarkan `user_id` dan Mengambil 20 Pengguna dengan Jumlah Rating Terbanyak
 
 Dari analisis data rating, ditemukan 20 pengguna paling aktif dengan jumlah rating terbanyak. Informasi ini penting karena pengguna aktif berkontribusi besar dalam membentuk pola rekomendasi sistem. Rata-rata rating yang mereka berikan juga membantu memahami kecenderungan penilaian masing-masing pengguna, yang berguna untuk meningkatkan akurasi rekomendasi.
 
@@ -208,7 +216,7 @@ Berikut adalah 20 pengguna teratas berdasarkan jumlah rating terbanyak:
 | 19  | 69817   | 2448   | 1.524918 |
 | 20  | 64531   | 2421   | 3.147047 |
 
-#### 5. Mengelompokkan Data Berdasarkan Judul Buku dan Mengurutkan dari Jumlah Rating Terbanyak
+#### 6. Mengelompokkan Data Berdasarkan Judul Buku dan Mengurutkan dari Jumlah Rating Terbanyak
 
 Dari hasil pengelompokan data berdasarkan judul buku, ditemukan 20 buku yang paling banyak mendapatkan rating dari pengguna. Buku-buku ini memiliki tingkat popularitas tinggi karena sering dinilai oleh banyak pengguna. Selain itu, informasi rata-rata rating pada masing-masing buku juga membantu mengukur seberapa baik buku tersebut diterima. Data ini sangat berguna untuk mengidentifikasi buku-buku populer dan berkualitas, yang dapat dijadikan prioritas dalam sistem rekomendasi.
 
@@ -237,13 +245,13 @@ Berikut adalah 20 judul buku teratas berdasarkan jumlah rating terbanyak:
 | 19  | Harry Potter and the Sorcerer's Stone             | 575   | 4.896562 |
 | 20  | Summer Sisters                                     | 573   | 3.612457 |
 
-#### 6. Mengecek dan Menangani Duplikat pada Dataset Gabungan
+#### 7. Mengecek dan Menangani Duplikat pada Dataset Gabungan
 Selanjutnya dilakukan pemeriksaan terhadap dataset gabungan untuk mengetahui keberadaan data duplikat. Berdasarkan hasil analisis, **tidak ditemukan duplikasi**, sehingga tidak diperlukan penghapusan data pada tahap ini.
 
-#### 7. Mengecek dan Menangani Missing Values pada Dataset Gabungan 
+#### 8. Mengecek dan Menangani Missing Values pada Dataset Gabungan 
 Hasil pemeriksaan menunjukkan bahwa dataset gabungan tidak mengandung missing values, sehingga tidak diperlukan proses imputasi atau penghapusan data pada tahap ini.
 
-#### 8. Sampling Dataset  
+#### 9. Sampling Dataset  
 Dataset gabungan memiliki lebih dari satu juta entri yang berpotensi memperlambat proses training. Oleh karena itu, dilakukan sampling sebanyak **500.000 data interaksi** dari gabungan dataset untuk menciptakan *dataframe* `data_small`. Sampling ini bertujuan untuk mempercepat eksplorasi dan pelatihan model tanpa kehilangan representativitas data.
 
 ---
